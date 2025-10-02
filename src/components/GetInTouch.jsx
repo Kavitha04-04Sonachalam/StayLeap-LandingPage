@@ -24,13 +24,11 @@ const GetInTouch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validate required fields
     if (!formData.fullName || !formData.email || !formData.phone || !formData.category || !formData.message) {
       alert('Please fill in all required fields');
       return;
     }
 
-    // Build the message text - Simple format without special characters
     const lines = [
       'New Inquiry from Stay Leap Website',
       '',
@@ -49,28 +47,18 @@ const GetInTouch = () => {
     lines.push(formData.message);
     
     const messageText = lines.join('\n');
-    
-    // Detect if user is on mobile
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     let whatsappUrl;
     
     if (isMobile) {
-      // For mobile: use whatsapp:// protocol which opens app directly with message
       whatsappUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(messageText)}`;
+      window.location.href = whatsappUrl;
     } else {
-      // For desktop: use wa.me link which opens WhatsApp Web
-      whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
+      whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(messageText)}`;
+      window.open(whatsappUrl, '_blank');
     }
     
-    console.log('Is Mobile:', isMobile);
-    console.log('WhatsApp URL:', whatsappUrl);
-    console.log('Message Text:', messageText);
-    
-    // Try to open WhatsApp
-    window.location.href = whatsappUrl;
-    
-    // Reset form after a short delay
     setTimeout(() => {
       setFormData({
         fullName: '',
@@ -91,23 +79,23 @@ const GetInTouch = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
             Get in Touch
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             Ready to manage your hostel efficiently? Fill out the form below or contact us directly.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
           {/* Left Column - Contact Form */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us an Inquiry</h3>
-            <div className="space-y-5">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Send Us an Inquiry</h3>
+            <div className="space-y-4 sm:space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name <span className="text-red-500">*</span>
@@ -118,7 +106,7 @@ const GetInTouch = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -133,7 +121,7 @@ const GetInTouch = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -148,7 +136,7 @@ const GetInTouch = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="+91 98765 43210"
                 />
               </div>
@@ -162,7 +150,7 @@ const GetInTouch = () => {
                   value={formData.category}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition bg-white"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition bg-white"
                 >
                   <option value="">Select a category</option>
                   <option value="Partners">Partners</option>
@@ -180,7 +168,7 @@ const GetInTouch = () => {
                   name="hostelDetails"
                   value={formData.hostelDetails}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="Number of rooms, location, etc."
                 />
               </div>
@@ -195,71 +183,71 @@ const GetInTouch = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition resize-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition resize-none"
                   placeholder="Tell us about your requirements..."
                 />
               </div>
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-green-600 text-white py-4 rounded-lg hover:bg-green-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                className="w-full bg-green-600 text-white py-3 sm:py-4 rounded-lg hover:bg-green-700 active:bg-green-800 transition-all font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
-                <Send className="h-5 w-5" />
+                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                 Send Query via WhatsApp
               </button>
             </div>
           </div>
 
           {/* Right Column - Contact Info & Features */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* WhatsApp Button */}
-            <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 text-white shadow-xl">
-              <h3 className="text-2xl font-bold mb-4">Quick Contact</h3>
-              <p className="mb-6 text-green-50">
+            <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-white shadow-lg sm:shadow-xl">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Quick Contact</h3>
+              <p className="mb-4 sm:mb-6 text-sm sm:text-base text-green-50">
                 Get instant responses! Chat with us on WhatsApp now.
               </p>
               <a
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-all hover:scale-105 font-semibold shadow-lg w-full justify-center"
+                className="inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-green-600 rounded-lg hover:bg-green-50 active:bg-green-100 transition-all hover:scale-105 active:scale-100 font-semibold text-sm sm:text-base shadow-lg w-full justify-center"
               >
-                <MessageCircle className="h-6 w-6" />
+                <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
                 Start WhatsApp Chat
               </a>
             </div>
 
             {/* Contact Information */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-6 w-6 text-blue-600" />
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-6 sm:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Contact Information</h3>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Phone</p>
-                    <p className="text-gray-600">+91 73581 05293</p>
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">Phone</p>
+                    <p className="text-gray-600 text-sm sm:text-base">+91 73581 05293</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-6 w-6 text-blue-600" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Email</p>
-                    <p className="text-gray-600">vyomanexgen@gmail.com</p>
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">Email</p>
+                    <p className="text-gray-600 text-sm sm:text-base break-all">vyomanexgen@gmail.com</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-blue-600" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Address</p>
-                    <p className="text-gray-600">
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">Address</p>
+                    <p className="text-gray-600 text-sm sm:text-base">
                       Madhapur, Hyderabad, 500032.
                     </p>
                   </div>
@@ -268,17 +256,17 @@ const GetInTouch = () => {
             </div>
 
             {/* Why Choose Us */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6">Why Choose Stay Leap?</h3>
-              <div className="space-y-4">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-6 sm:p-8 text-white">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Why Choose Stay Leap?</h3>
+              <div className="space-y-3 sm:space-y-4">
                 {features.map((feature, index) => {
                   const Icon = feature.icon;
                   return (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Icon className="h-5 w-5" />
+                    <div key={index} className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </div>
-                      <span className="font-medium">{feature.text}</span>
+                      <span className="font-medium text-sm sm:text-base">{feature.text}</span>
                     </div>
                   );
                 })}
