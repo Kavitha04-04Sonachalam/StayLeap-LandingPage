@@ -30,32 +30,57 @@ const GetInTouch = () => {
       return;
     }
 
-    // Create WhatsApp message - simple text format
-    const msg = `New Inquiry from Stay Leap
-
-Name: ${formData.fullName}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Category: ${formData.category}
-Hostel Details: ${formData.hostelDetails || 'N/A'}
-Message: ${formData.message}`;
+    // Build the message text - Simple format without special characters
+    const lines = [
+      'New Inquiry from Stay Leap Website',
+      '',
+      'Name: ' + formData.fullName,
+      'Email: ' + formData.email,
+      'Phone: ' + formData.phone,
+      'Category: ' + formData.category
+    ];
     
-    // Use proper encoding
-    const encodedMsg = encodeURIComponent(msg);
+    if (formData.hostelDetails) {
+      lines.push('Hostel Details: ' + formData.hostelDetails);
+    }
     
-    // Try WhatsApp Web first (works better for desktop)
-    const whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMsg}`;
-    window.open(whatsappUrl, '_blank');
+    lines.push('');
+    lines.push('Message:');
+    lines.push(formData.message);
     
-    // Reset form
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      category: '',
-      hostelDetails: '',
-      message: ''
-    });
+    const messageText = lines.join('\n');
+    
+    // Detect if user is on mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let whatsappUrl;
+    
+    if (isMobile) {
+      // For mobile: use whatsapp:// protocol which opens app directly with message
+      whatsappUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(messageText)}`;
+    } else {
+      // For desktop: use wa.me link which opens WhatsApp Web
+      whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
+    }
+    
+    console.log('Is Mobile:', isMobile);
+    console.log('WhatsApp URL:', whatsappUrl);
+    console.log('Message Text:', messageText);
+    
+    // Try to open WhatsApp
+    window.location.href = whatsappUrl;
+    
+    // Reset form after a short delay
+    setTimeout(() => {
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        category: '',
+        hostelDetails: '',
+        message: ''
+      });
+    }, 2000);
   };
 
   const features = [
@@ -180,7 +205,7 @@ Message: ${formData.message}`;
                 className="w-full bg-green-600 text-white py-4 rounded-lg hover:bg-green-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
                 <Send className="h-5 w-5" />
-                Send Query
+                Send Query via WhatsApp
               </button>
             </div>
           </div>
@@ -235,8 +260,7 @@ Message: ${formData.message}`;
                   <div>
                     <p className="font-semibold text-gray-900">Address</p>
                     <p className="text-gray-600">
-                       Madhapur, Hyderabad, 500032.<br />
-                      
+                      Madhapur, Hyderabad, 500032.
                     </p>
                   </div>
                 </div>
