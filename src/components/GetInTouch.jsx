@@ -6,12 +6,13 @@ const GetInTouch = () => {
     fullName: '',
     email: '',
     phone: '',
+    category: '',
     hostelDetails: '',
     message: ''
   });
 
-  const whatsappNumber = '1234567890';
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=Hi! I'm interested in Stay Leap hostel management system`;
+  const whatsappNumber = '917358105293';
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hi! I'm interested in Stay Leap hostel management system")}`;
 
   const handleChange = (e) => {
     setFormData({
@@ -22,12 +23,36 @@ const GetInTouch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you! We will get back to you soon.');
+    
+    // Validate required fields
+    if (!formData.fullName || !formData.email || !formData.phone || !formData.category || !formData.message) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Create WhatsApp message - simple text format
+    const msg = `New Inquiry from Stay Leap
+
+Name: ${formData.fullName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Category: ${formData.category}
+Hostel Details: ${formData.hostelDetails || 'N/A'}
+Message: ${formData.message}`;
+    
+    // Use proper encoding
+    const encodedMsg = encodeURIComponent(msg);
+    
+    // Try WhatsApp Web first (works better for desktop)
+    const whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMsg}`;
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form
     setFormData({
       fullName: '',
       email: '',
       phone: '',
+      category: '',
       hostelDetails: '',
       message: ''
     });
@@ -68,7 +93,7 @@ const GetInTouch = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -83,7 +108,7 @@ const GetInTouch = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -98,9 +123,27 @@ const GetInTouch = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="+91 98765 43210"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Category <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition bg-white"
+                >
+                  <option value="">Select a category</option>
+                  <option value="Partners">Partners</option>
+                  <option value="Supporters">Supporters</option>
+                  <option value="Contributors">Contributors</option>
+                </select>
               </div>
 
               <div>
@@ -112,7 +155,7 @@ const GetInTouch = () => {
                   name="hostelDetails"
                   value={formData.hostelDetails}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   placeholder="Number of rooms, location, etc."
                 />
               </div>
@@ -127,17 +170,17 @@ const GetInTouch = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition resize-none"
                   placeholder="Tell us about your requirements..."
                 />
               </div>
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                className="w-full bg-green-600 text-white py-4 rounded-lg hover:bg-green-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
                 <Send className="h-5 w-5" />
-                Send Inquiry
+                Send Query
               </button>
             </div>
           </div>
@@ -171,7 +214,7 @@ const GetInTouch = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Phone</p>
-                    <p className="text-gray-600">+91 98765 43210</p>
+                    <p className="text-gray-600">+91 73581 05293</p>
                   </div>
                 </div>
 
@@ -181,7 +224,7 @@ const GetInTouch = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email</p>
-                    <p className="text-gray-600">contact@stayleap.com</p>
+                    <p className="text-gray-600">vyomanexgen@gmail.com</p>
                   </div>
                 </div>
 
@@ -192,8 +235,8 @@ const GetInTouch = () => {
                   <div>
                     <p className="font-semibold text-gray-900">Address</p>
                     <p className="text-gray-600">
-                      123 Hostel Street, Madurai,<br />
-                      Tamil Nadu 625001, India
+                       Madhapur, Hyderabad, 500032.<br />
+                      
                     </p>
                   </div>
                 </div>

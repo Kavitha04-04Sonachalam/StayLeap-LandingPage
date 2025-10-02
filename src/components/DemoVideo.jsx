@@ -3,7 +3,7 @@ import { Play } from 'lucide-react';
 
 const DemoVideo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoId = 'dQw4w9WgXcQ'; // Replace with your actual YouTube video ID
+  const videoId = 'Dcx_oU3ly8U'; // Updated YouTube video ID
 
   return (
     <section id="demo" className="py-20 bg-gradient-to-br from-blue-50 to-white">
@@ -34,7 +34,7 @@ const DemoVideo = () => {
               <div className="relative" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080`}
                   title="Stay Leap Demo Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
