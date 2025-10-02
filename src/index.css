@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hostel Management Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.75rem;
+
+    /* DataHub Pro - Admin Dashboard Design System */
+    --admin-primary: 225 100% 58%; /* #2B5EFF blue */
+    --admin-primary-hover: 228 85% 52%; /* #1E4DD8 darker blue hover */
+    --admin-primary-foreground: 0 0% 100%;
+    --admin-bg: 220 13% 98%; /* #F9FAFB light gray background */
+    --admin-card: 0 0% 100%; /* #FFFFFF white cards */
+    --admin-card-foreground: 215 25% 12%; /* #1F2937 dark gray text */
+    --admin-sidebar-bg: 0 0% 100%; /* #FFFFFF white background */
+    --admin-sidebar-text: 215 25% 12%; /* #1F2937 dark gray/black text */
+    --admin-sidebar-active-bg: 216 100% 95%; /* #E6F1FF light blue highlight */
+    --admin-sidebar-active-text: 216 100% 45%; /* #007BFF blue active text */
+    --admin-sidebar-icon: 215 25% 12%; /* #1F2937 dark icons */
+    --admin-header-bg: 0 0% 100%; /* #FFFFFF white header */
+    --admin-header-text: 215 25% 12%; /* #1F2937 dark gray text */
+    --admin-secondary-text: 215 16% 29%; /* #4B5563 secondary text */
+    --admin-description-text: 215 13% 42%; /* #6B7280 description text */
+    --admin-border: 214 32% 91%; /* #E5E7EB border color */
+    --admin-success: 158 64% 52%; /* #10B981 green success */
+    --admin-danger: 0 84% 61%; /* #EF4444 red danger */
+
+    /* Page-specific Admin Colors */
+    /* Dashboard */
+    --dashboard-primary: 216 100% 48%;  /* #0061f2 */
+    --dashboard-card-bg: 210 33% 97%;  /* #f0f4f8 */
+    --dashboard-bg: 0 0% 100%;  /* #ffffff */
+    
+    /* Dashboard Continue */
+    --dashboard-continue-primary: 216 100% 48%;  /* #0061f2 */
+    --dashboard-continue-accent: 171 100% 39%;  /* #00c9a7 */
+    --dashboard-continue-bg: 208 77% 98%;  /* #f5f9fc */
+    
+    /* Tenant Management */
+    --tenant-primary: 225 67% 58%;  /* #4b7bec */
+    --tenant-card-bg: 210 60% 98%;  /* #f6f9fc */
+    --tenant-bg: 0 0% 100%;  /* #ffffff */
+    
+    /* Add Tenant Form */
+    --form-primary: 214 65% 56%;  /* #2f80ed */
+    --form-accent: 196 85% 66%;  /* #56ccf2 */
+    --form-bg: 219 19% 97%;  /* #f4f6f8 */
+    
+    /* Payment Tracking */
+    --payment-primary: 168 76% 42%;  /* #1abc9c */
+    --payment-warning: 35 84% 52%;  /* #f39c12 */
+    --payment-bg: 0 0% 98%;  /* #fafafa */
+    
+    /* Room Occupancy */
+    --room-primary: 255 64% 68%;  /* #6c5ce7 */
+    --room-accent: 181 72% 72%;  /* #81ecec */
+    --room-bg: 0 0% 100%;  /* #ffffff */
+    
+    /* Reports & Analytics */
+    --reports-primary: 178 100% 40%;  /* #00cec9 */
+    --reports-accent: 46 93% 82%;  /* #ffeaa7 */
+    --reports-bg: 0 0% 96%;  /* #f4f4f4 */
+    
+    --paid: 142 76% 36%;  /* Green */
+    --paid-foreground: 0 0% 100%;
+    
+    --pending: 45 93% 47%;  /* Orange */
+    --pending-foreground: 0 0% 100%;
+    
+    --overdue: 0 84% 60%;  /* Red */
+    --overdue-foreground: 0 0% 100%;
+    
+    --priority-high: 0 84% 60%;
+    --priority-high-foreground: 0 0% 100%;
+    
+    --priority-medium: 24 95% 53%;
+    --priority-medium-foreground: 0 0% 100%;
+    
+    --priority-low: 122 39% 49%;
+    --priority-low-foreground: 0 0% 100%;
+    
+    --light-green: 120 60% 95%;
+    --light-green-foreground: 122 39% 30%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--mustard-orange)), hsl(var(--accent-purple)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 96%));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+  }
+}
